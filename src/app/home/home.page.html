@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary ion-text-center">
+    <ion-title class="principal">
+      Nova Despesa
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+
+  <form [formGroup]="formGroup">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Motivo da despesa</ion-label>
+      <ion-input type="text" [(ngModel)]="despesa.motivo" formControlName="motivoControl"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Valor gasto</ion-label>
+      <ion-input type="number" [(ngModel)]="despesa.valor" formControlName="valorControl"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo </ion-label>
+      <ion-select class="custom-options" [(ngModel)]="despesa.tipo" formControlName="tipoControl">
+        <ion-select-option *ngFor="let tipo of tipos" [value]="tipo">{{tipo}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Categoria </ion-label>
+      
+      <ion-badge color="warning">
+        <ion-icon name="star"></ion-icon>
+        Novo
+      </ion-badge>
+
+      <ion-select class="custom-options" [(ngModel)]="despesa.categoria" formControlName="categoriaControl">
+        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data </ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY"  [(ngModel)]="despesa.data" formControlName="dataControl">
+      </ion-datetime>
+    </ion-item>
+  </ion-list>
+  <ion-button fill="outline" shape="round" expand="block" color="danger" input type="reset">
+    <ion-icon name="trash-sharp"></ion-icon>
+    limpar
+  </ion-button>
+  <ion-button fill="solid" shape="round" expand="block" color="primary" (click)="adicionar()" [disabled]="!formGroup.valid">
+    <ion-icon name="add-circle-sharp"></ion-icon>
+    Adicionar
+  </ion-button>
+  <ion-button fill="solid" shape="round" expand="block" color="tertiary" [routerLink]="['/exibe-despesas']" routerLinkActive="router-link-active">
+    <ion-icon name="checkmark-circle-sharp"></ion-icon>
+    Despesas cadastradas</ion-button>
+  </form>
+</ion-content>
